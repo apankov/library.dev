@@ -1,0 +1,7 @@
+Options +FollowSymLinks +ExecCGI
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  # redirect to front web controller
+  RewriteRule ^(.*)$ index.php [QSA,L]
+</IfModule>
