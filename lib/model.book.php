@@ -24,11 +24,11 @@ function find_book_by_id($id) {
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
 function update_book_obj($book_obj) {
-    return update_object($book_obj, 'books');
+    return update_object($book_obj, 'books', book_columns());
 }
 
 function create_book_obj($book_obj) {
-    return create_object($book_obj, 'books');
+    return create_object($book_obj, 'books', book_columns());
 }
 
 function delete_book_obj($man_obj) {
@@ -41,4 +41,8 @@ function delete_book_by_id($book_id) {
 
 function make_book_obj($params, $obj = null) {
     return make_model_object($params, $obj);
+}
+
+function book_columns() {
+    return array('title', 'author_id', 'year');
 }

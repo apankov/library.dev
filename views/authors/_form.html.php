@@ -1,5 +1,5 @@
-<form method="post" >
-  <input type="hidden" name="author[id]" id="author_id" value="<?php echo $author->id ?>" />
+<form method="POST" action="<?php echo $action ?>">
+  <input type="hidden" name="_method" id="_method" value="<?php echo $method ?>" />
 
   <div>
     <p>Author Name:</p>

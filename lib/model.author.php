@@ -15,11 +15,11 @@ function find_author_by_id($id) {
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
 
 function update_author_obj($author_obj) {
-    return update_object($author_obj, 'authors');
+    return update_object($author_obj, 'authors', author_columns());
 }
 
 function create_author_obj($author_obj) {
-    return create_object($author_obj, 'authors');
+    return create_object($author_obj, 'authors', author_columns());
 }
 
 function delete_author_obj($man_obj) {
@@ -32,4 +32,8 @@ function delete_author_by_id($author_id) {
 
 function make_author_obj($params, $obj = null) {
     return make_model_object($params, $obj);
+}
+
+function author_columns() {
+    return array('name', 'birthday', 'bio');
 }

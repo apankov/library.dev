@@ -35,28 +35,25 @@ function make_model_object($params, $obj = null) {
 
 function delete_object_by_id($obj_id, $table) {
     $db = option('db_conn');
-    $stmt = $db->prepare("DELETE FROM `$table` WHERE id = :id ");
-    $stmt->bindParam(':id', $obj_id);
-    $stmt->execute();
+
+    $stmt = $db->prepare("DELETE FROM `$table` WHERE id = ?");
+    $stmt->execute(array($obj_id));
 }
 
 function add_colon($x) { return ':' . $x; };
 
-function create_object($object, $table) {
+function create_object($object, $table, $obj_columns = array()) {
     $db = option('db_conn');
-
-    $vars = get_object_vars($object);
-    unset($vars['id']);
 
     $sql =
         "INSERT INTO `$table` (" .
-        implode(', ', array_keys($vars)) .
+        implode(', ', $obj_columns) .
         ') VALUES (' .
-        implode(', ', array_map('add_colon', array_keys($vars))) . ')';
+        implode(', ', array_map('add_colon', $obj_columns)) . ')';
 
     $stmt = $db->prepare($sql);
-    foreach ($vars as $key => $value) {
-        $stmt->bindValue(':' . $key, $value);
+    foreach ($obj_columns as $column) {
+        $stmt->bindValue(':' . $column, $object->$column);
     }
 
     $stmt->execute();
@@ -65,22 +62,18 @@ function create_object($object, $table) {
 
 function name_eq_colon_name($x) { return $x . ' = :' . $x; };
 
-function update_object($object, $table) {
+function update_object($object, $table, $obj_columns = array()) {
     $db = option('db_conn');
-
-    $vars = get_object_vars($object);
-    $id = $vars['id'];
-    unset($vars['id']);
 
     $sql =
         "UPDATE `$table` SET " .
-        implode(', ', array_map('name_eq_colon_name', array_keys($vars))) .
+        implode(', ', array_map('name_eq_colon_name', $obj_columns)) .
         ' WHERE id = :id';
 
     $stmt = $db->prepare($sql);
-    $stmt->bindValue(':id', $id);
-    foreach ($vars as $key => $value) {
-        $stmt->bindValue(':' . $key,  $value);
+    $stmt->bindValue(':id', $object->id);
+    foreach ($obj_columns as $column) {
+        $stmt->bindValue(':' . $column, $object->$column);
     }
 
     return $stmt->execute();

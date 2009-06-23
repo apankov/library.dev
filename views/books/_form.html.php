@@ -1,5 +1,5 @@
-<form method="post" >
-  <input type="hidden" name="book[id]" id="book_id" value="<?php echo $book->id ?>" />
+<form method="POST" action="<?php echo $action ?>">
+  <input type="hidden" name="_method" id="_method" value="<?php echo $method ?>" />
 
   <div>
     <p>Book Title:</p>
@@ -18,8 +18,8 @@
   </div>
 
   <div>
-    <p>Year:</p>
-    <p><input type="text" name="book[year]" id="book_year" value="<?php echo intval($book->year) ?>" /></p>
+    <p>Publication Year:</p>
+    <p><input type="text" name="book[year]" id="book_year" value="<?php echo $book->year ?>" /></p>
   </div>
 
   <div>

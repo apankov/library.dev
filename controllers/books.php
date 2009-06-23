@@ -1,12 +1,12 @@
 <?php
 
-# GET /book
-function books_list() {
+# GET /books
+function books_index() {
     set('books', find_books());
-    return html('books/list.html.php');
+    return html('books/index.html.php');
 }
 
-# GET /books/:id/show
+# GET /books/:id
 function books_show() {
     $book = get_book_or_404();
     set('book', $book);
@@ -21,10 +21,9 @@ function books_edit() {
     return html('books/edit.html.php');
 }
 
-# POST /books/:id/edit
+# PUT /books/:id
 function books_update() {
     $book_data = isset($_POST['book']) && is_array($_POST['book']) ? $_POST['book'] : array();
-    unset($book_data['id']);
     $book = get_book_or_404();
     $book = make_book_obj($book_data, $book);
 
@@ -40,7 +39,7 @@ function books_new() {
     return html('books/new.html.php');
 }
 
-# POST /books/new
+# POST /books
 function books_create() {
     $book_data = isset($_POST['book']) && is_array($_POST['book']) ? $_POST['book'] : array();
     $book = make_book_obj($book_data);
@@ -49,8 +48,8 @@ function books_create() {
     redirect('/books');
 }
 
-# POST /books/:id/delete
-function books_delete() {
+# DELETE /books/:id
+function books_destroy() {
     delete_book_by_id(intval(params('id')));
     redirect('/books');
 }
