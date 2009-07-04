@@ -23,7 +23,7 @@ function books_edit() {
 
 # PUT /books/:id
 function books_update() {
-    $book_data = isset($_POST['book']) && is_array($_POST['book']) ? $_POST['book'] : array();
+    $book_data = book_data_from_form();
     $book = get_book_or_404();
     $book = make_book_obj($book_data, $book);
 
@@ -33,7 +33,7 @@ function books_update() {
 
 # GET /books/new
 function books_new() {
-    $book_data = isset($_POST['book']) && is_array($_POST['book']) ? $_POST['book'] : array();
+    $book_data = book_data_from_form();
     set('book', make_book_obj($book_data));
     set('authors', find_authors());
     return html('books/new.html.php');
@@ -41,7 +41,7 @@ function books_new() {
 
 # POST /books
 function books_create() {
-    $book_data = isset($_POST['book']) && is_array($_POST['book']) ? $_POST['book'] : array();
+    $book_data = book_data_from_form();
     $book = make_book_obj($book_data);
 
     create_book_obj($book);
@@ -50,14 +50,18 @@ function books_create() {
 
 # DELETE /books/:id
 function books_destroy() {
-    delete_book_by_id(intval(params('id')));
+    delete_book_by_id(filter_var(params('id'), FILTER_VALIDATE_INT));
     redirect('/books');
 }
 
 function get_book_or_404() {
-    $book = find_book_by_id(intval(params('id')));
+    $book = find_book_by_id(filter_var(params('id'), FILTER_VALIDATE_INT));
     if (is_null($book)) {
         halt(NOT_FOUND, "This book doesn't exist.");
     }
     return $book;
+}
+
+function book_data_from_form() {
+    return isset($_POST['book']) && is_array($_POST['book']) ? $_POST['book'] : array();
 }
