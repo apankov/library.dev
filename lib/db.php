@@ -45,6 +45,11 @@ function add_colon($x) { return ':' . $x; };
 function create_object($object, $table, $obj_columns = array()) {
     $db = option('db_conn');
 
+    if (!count($obj_columns)) {
+        $obj_columns = array_keys(get_object_vars($object));
+    }
+    unset($obj_columns['id']);
+
     $sql =
         "INSERT INTO `$table` (" .
         implode(', ', $obj_columns) .
@@ -64,6 +69,10 @@ function name_eq_colon_name($x) { return $x . ' = :' . $x; };
 
 function update_object($object, $table, $obj_columns = array()) {
     $db = option('db_conn');
+
+    if (!count($obj_columns)) {
+        $obj_columns = array_keys(get_object_vars($object));
+    }
 
     $sql =
         "UPDATE `$table` SET " .
