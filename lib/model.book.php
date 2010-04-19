@@ -46,3 +46,15 @@ function make_book_obj($params, $obj = null) {
 function book_columns() {
     return array('title', 'author_id', 'year');
 }
+
+function book_data_filters() {
+    return array(
+        'book[title]' => FILTER_SANITIZE_SPECIAL_CHARS,
+        'book[author_id]' => array("filter"  => FILTER_VALIDATE_INT,
+                             "flags"   => FILTER_FLAG_ARRAY,
+                             "options" => array("min_range" => 1)),
+        'book[year]' => array("filter"  => FILTER_VALIDATE_INT,
+                        "flags"   => FILTER_FLAG_ARRAY,
+                        "options" => array("min_range" => 0)),
+    );
+}
