@@ -11,4 +11,4 @@
 </div>
 
 <hr/>
-<?php echo link_to('Back to books', '/books') ?>
+<?php echo link_to('Back to books', 'books') ?>

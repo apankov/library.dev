@@ -24,7 +24,7 @@
 
   <div>
     <p>
-      <?php echo link_to('Cancel', '/books'), "\n" ?>
+      <?php echo link_to('Cancel', 'books'), "\n" ?>
       <input type="submit" value="Save" />
     </p>
   </div>

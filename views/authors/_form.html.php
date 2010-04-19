@@ -18,7 +18,7 @@
 
   <div>
     <p>
-      <?php echo link_to('Cancel', '/authors'), "\n" ?>
+      <?php echo link_to('Cancel', 'authors'), "\n" ?>
       <input type="submit" value="Save" />
     </p>
   </div>

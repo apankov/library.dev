@@ -28,7 +28,7 @@ function books_update() {
     $book = make_book_obj($book_data, $book);
 
     update_book_obj($book);
-    redirect('/books');
+    redirect('books');
 }
 
 # GET /books/new
@@ -45,13 +45,13 @@ function books_create() {
     $book = make_book_obj($book_data);
 
     create_book_obj($book);
-    redirect('/books');
+    redirect('books');
 }
 
 # DELETE /books/:id
 function books_destroy() {
     delete_book_by_id(filter_var(params('id'), FILTER_VALIDATE_INT));
-    redirect('/books');
+    redirect('books');
 }
 
 function get_book_or_404() {

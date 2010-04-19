@@ -27,7 +27,7 @@ function authors_update() {
     $author = make_author_obj($author_data, $author);
 
     update_author_obj($author);
-    redirect('/authors');
+    redirect('authors');
 }
 
 # GET /authors/new
@@ -43,13 +43,13 @@ function authors_create() {
     $author = make_author_obj($author_data);
 
     create_author_obj($author);
-    redirect('/authors');
+    redirect('authors');
 }
 
 # DELETE /authors/:id
 function authors_destroy() {
     delete_author_by_id(filter_var(params('id'), FILTER_VALIDATE_INT));
-    redirect('/authors');
+    redirect('authors');
 }
 
 function get_author_or_404() {

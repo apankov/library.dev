@@ -15,4 +15,4 @@
 </div>
 
 <hr/>
-<?php echo link_to('Back to authors', '/authors') ?>
+<?php echo link_to('Back to authors', 'authors') ?>
