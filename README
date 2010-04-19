@@ -1,5 +1,5 @@
 This is an example of using micro framework Limonade, written in PHP,
-http://limonade.sofa-design.net/
+http://www.limonade-php.net/
 You can find DB support, simple CRUD interface, some useful template helpers.
 Hope this can save you some keystrokes.
 
