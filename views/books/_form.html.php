@@ -12,7 +12,7 @@
       <select name="book[author_id]" id="book_author_id">
         <option id="0"></option>
 <?php
-    foreach($authors as $author) {
+    foreach ($authors as $author) {
         echo option_tag($author->id, $author->name, $book->author_id), "\n";
     }
 ?>

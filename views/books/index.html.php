@@ -12,4 +12,4 @@
 </ul>
 
 <hr/>
-<?php echo link_to('New book', 'books/new')?>
+<?php echo link_to('New book', 'books/new') ?>
